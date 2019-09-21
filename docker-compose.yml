@@ -1,0 +1,44 @@
+version: '3'
+services:
+  es:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.3.2
+    container_name: es
+    ports:
+      - 127.0.0.1:9200:9200
+    environment:
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    restart: always
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.3.2
+    container_name: kibana
+    ports:
+      - 127.0.0.1:5601:5601
+    environment:
+      ELASTICSEARCH_HOSTS: http://es:9200
+    depends_on:
+      - es
+    restart: always
+  apm_server:
+    image: docker.elastic.co/apm/apm-server:7.3.2
+    container_name: apm-server
+    ports:
+      - 0.0.0.0:8200:8200
+    volumes:
+      - ./conf/apm/apm-server.yml:/usr/share/apm-server/apm-server.yml:ro
+    depends_on:
+      - es
+      - kibana
+    restart: always
+  proxy:
+    image: nginx
+    container_name: proxy
+    ports:
+      - 0.0.0.0:80:80
+    volumes:
+      - ./conf/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./conf/nginx/.htpasswd:/etc/nginx/.htpasswd:ro
+      - ./conf/nginx/server.conf:/etc/nginx/server.conf:ro
+    depends_on:
+      - kibana
+    restart: always
