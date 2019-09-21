@@ -9,6 +9,13 @@ services:
       - discovery.type=single-node
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     restart: always
+    logging:
+      driver: "json-file"
+      options:
+        mode: "non-blocking"
+        max-size: "10m"
+        max-file: "3"
+        compress: "true"
   kibana:
     image: docker.elastic.co/kibana/kibana:7.3.2
     container_name: kibana
@@ -19,6 +26,13 @@ services:
     depends_on:
       - es
     restart: always
+    logging:
+      driver: "json-file"
+      options:
+        mode: "non-blocking"
+        max-size: "10m"
+        max-file: "3"
+        compress: "true"
   apm_server:
     image: docker.elastic.co/apm/apm-server:7.3.2
     container_name: apm-server
@@ -30,6 +44,13 @@ services:
       - es
       - kibana
     restart: always
+    logging:
+      driver: "json-file"
+      options:
+        mode: "non-blocking"
+        max-size: "10m"
+        max-file: "3"
+        compress: "true"
   proxy:
     image: nginx
     container_name: proxy
@@ -42,3 +63,10 @@ services:
     depends_on:
       - kibana
     restart: always
+    logging:
+      driver: "json-file"
+      options:
+        mode: "non-blocking"
+        max-size: "10m"
+        max-file: "3"
+        compress: "true"
