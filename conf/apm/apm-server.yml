@@ -31,7 +31,7 @@ apm-server:
   # agents must send it in the following format: Authorization: Bearer <secret-token>.
   # It is recommended to use an authorization token in combination with SSL enabled,
   # and save the token in the apm-server keystore. The token is not used for the RUM endpoint.
-  #secret_token:
+  secret_token: 8227eafcf0b36221c4a6a9d97090bf19
 
   # Enable secure communication between APM agents and the server. By default ssl is disabled.
   #ssl:

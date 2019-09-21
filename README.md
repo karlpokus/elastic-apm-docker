@@ -21,7 +21,8 @@ Use `-u admin:a7a1a37c6d2dc5d0e07121892c58ed2c` for kibana access
 # todos
 - [x] nginx proxy auth
 - [x] restart always
-- [ ] apm-server secret_token
+- [x] apm-server secret_token
+- [ ] pass secrets via ENV
 - [ ] Persistant data. Destroy with the v flag
 - [ ] log to local or journald https://docs.docker.com/config/containers/logging/journald/
 
