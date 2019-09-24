@@ -41,7 +41,7 @@ services:
     environment:
       - ELASTIC_APM_SECRET_TOKEN
     volumes:
-      - ./conf/apm/apm-server.yml:/usr/share/apm-server/apm-server.yml:ro
+      - ./conf/apm/apm-server.yml:/usr/share/apm-server/apm-server.yml # cannot be ro
     depends_on:
       - es
       - kibana
