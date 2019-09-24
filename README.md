@@ -35,7 +35,7 @@ $ curl -i http://localhost:9300/api/v1/user
 
 View apm data in kibana on `localhost:5601`.
 
-Note: use `-u admin:a7a1a37c6d2dc5d0e07121892c58ed2c` for kibana access if the stack is deployed and running behind the proxy.
+Note: use the user credentials created during preparations for kibana access if the stack is deployed and running behind the proxy.
 
 # network
 Communication between services via local docker network. Only apm-server and proxy (to kibana) are open to the internet. Elasticsearch and kibana are exposed only on localhost.
