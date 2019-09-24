@@ -1,7 +1,6 @@
+// the agent gets a token and url from env
 const apm = require('elastic-apm-node').start({ // note: swallows exceptions
-	serviceName: "silly-web-app",
-	secretToken: "8227eafcf0b36221c4a6a9d97090bf19",
-	serverUrl: "http://localhost:8200"
+	serviceName: "silly-web-app"
 });
 
 const Koa = require('koa');

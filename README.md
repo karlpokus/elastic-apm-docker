@@ -1,15 +1,31 @@
 # elastic-apm-docker
 Deploy docker-composed elastic apm 7.3.2 with proxy auth. Work in progress.
 
-# usage
-Run elastic apm stack
+# preparations
+Setup auth before deploing the stack:
+
+Add users to the proxy
 ```bash
-$ docker-compose up|down -d [-v]
+# The -c flag creates the file. Omit it to add multiple users.
+$ htpasswd [-c] ./conf/nginx/.htpasswd <user>
+```
+
+Generate a ELASTIC_APM_SECRET_TOKEN
+```bash
+$ openssl rand -hex 16
+```
+
+# usage
+Manage the elastic apm stack
+```bash
+$ ELASTIC_APM_SECRET_TOKEN=<token> docker-compose up|down -d [-v]
 ```
 
 Run web app test
 ```bash
-$ ELASTIC_APM_ACTIVE=<bool> node app/index.js
+$ ELASTIC_APM_ACTIVE=<bool> \
+ELASTIC_APM_SERVER_URL=<url> \
+ELASTIC_APM_SECRET_TOKEN=<token> node app/index.js
 ```
 
 Make an api request
@@ -29,12 +45,13 @@ Communication between services via local docker network. Only apm-server and pro
 - [x] restart always
 - [x] apm-server secret_token
 - [ ] toggle apm rum
-- [ ] pass secrets (basic auth pwds, apm-token) via ENV
+- [x] pass secrets via ENV
 - [ ] persistant service data
 - [ ] add metricbeat
 - [x] persistant, non-blocking logging
 - [x] turn off proxy access log for /
 - [ ] add feedback for when stack is up. apm-server takes a while depending on es and kibana.
+- [ ] dockerize test app
 
 # docker refs
 - https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html
