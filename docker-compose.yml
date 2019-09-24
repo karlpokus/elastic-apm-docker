@@ -33,15 +33,15 @@ services:
         max-size: "10m"
         max-file: "3"
         compress: "true"
-  apm_server:
+  apmsrv:
     image: docker.elastic.co/apm/apm-server:7.3.2
-    container_name: apm-server
+    container_name: apmsrv
     ports:
       - 0.0.0.0:8200:8200
     environment:
       - ELASTIC_APM_SECRET_TOKEN
     volumes:
-      - ./conf/apm/apm-server.yml:/usr/share/apm-server/apm-server.yml # cannot be ro
+      - ./conf/apm/apm-server.yml:/usr/share/apm-server/apm-server.yml:rw # cannot be ro
     depends_on:
       - es
       - kibana
