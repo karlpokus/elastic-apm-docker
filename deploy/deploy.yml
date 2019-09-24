@@ -1,0 +1,10 @@
+---
+
+- hosts: all
+  name: deploy elastic apm stack
+  remote_user: "{{ user }}"
+  roles:
+    - timezone
+    - ufw
+    - tools
+    - repo

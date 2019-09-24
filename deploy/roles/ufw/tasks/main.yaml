@@ -1,0 +1,23 @@
+---
+
+- name: Install
+  become: true
+  apt:
+    name: ufw
+    update_cache: yes
+
+- name: Expose proxy
+  become: true
+  ufw:
+    rule: allow
+    port: 80
+    proto: tcp
+    state: enabled
+
+- name: Expose apm-server
+  become: true
+  ufw:
+    rule: allow
+    port: 8200
+    proto: tcp
+    state: enabled

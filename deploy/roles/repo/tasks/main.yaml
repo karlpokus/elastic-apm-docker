@@ -1,0 +1,7 @@
+---
+
+- name: Clone
+  git:
+    repo: 'https://github.com/karlpokus/elastic-apm-docker'
+    dest: /home/{{ user }}/elastic-apm-docker
+    update: yes

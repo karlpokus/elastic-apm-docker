@@ -1,16 +1,30 @@
 # elastic-apm-docker
-Deploy docker-composed elastic apm 7.3.2 with proxy auth. Work in progress.
+Deploy docker-composed elastic apm 7.3.2 with proxy auth on a single remote docker host. Work in progress.
 
-# preparations
-Setup auth before deploing the stack:
+# deploy
+requirements
+- a remote host with docker installed
+- ssh access to said host as root
+- docker group present on host to run sudoless
 
-Add users to the proxy
+```bash
+$ cd deploy
+# You only need to run setup once
+$ ansible-playbook -i <host_ip>, setup.yml
+# deploy.yml is idempotent
+$ ansible-playbook -i <host_ip>, deploy.yml
+```
+
+# auth
+Setup auth on remote host before running the stack. Start by adding users to the proxy
+
 ```bash
 # The -c flag creates the file. Omit it to add multiple users.
 $ htpasswd [-c] ./conf/nginx/.htpasswd <user>
 ```
 
 Generate a ELASTIC_APM_SECRET_TOKEN
+
 ```bash
 $ openssl rand -hex 16
 ```
@@ -18,8 +32,9 @@ $ openssl rand -hex 16
 # usage
 Manage the elastic apm stack
 ```bash
-$ ELASTIC_APM_SECRET_TOKEN=<token> docker-compose up|down -d [-v]
+$ ELASTIC_APM_SECRET_TOKEN=<token> docker-compose up|down [-d -v]
 ```
+As apm-server is dependent on es and kibana (and they are sloow to boot) it might take a while (10-20s) for the stack to be up.
 
 Run web app test
 ```bash
@@ -33,7 +48,7 @@ Make an api request
 $ curl -i http://localhost:9300/api/v1/user
 ```
 
-View apm data in kibana on `localhost:5601`.
+View apm data in kibana.
 
 Note: use the user credentials created during preparations for kibana access if the stack is deployed and running behind the proxy.
 
@@ -52,13 +67,7 @@ Communication between services via local docker network. Only apm-server and pro
 - [x] turn off proxy access log for /
 - [ ] add feedback for when stack is up. apm-server takes a while depending on es and kibana.
 - [ ] dockerize test app
-
-# docker refs
-- https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html
-- https://www.elastic.co/guide/en/kibana/current/docker.html
-- https://www.elastic.co/guide/en/apm/server/current/running-on-docker.html
-- https://github.com/yidinghan/eak/blob/master/docker-compose.yml
-- https://github.com/gusibi/docker-apm/blob/master/docker-compose.yml
+- [ ] consider healtchecks https://docs.docker.com/compose/compose-file/#healthcheck (`/api/status` for kibana `/` for es and apm-server)
 
 # license
 MIT
