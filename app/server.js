@@ -12,7 +12,7 @@ const app = new Koa();
 const router = new Router({ prefix: "/api/v1" });
 
 router
-	.get("/user", routes.user)
+	.get("/user", routes.logger, routes.user)
 
 app
 	.use(bodyparser())
