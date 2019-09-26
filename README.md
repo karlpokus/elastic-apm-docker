@@ -43,7 +43,8 @@ $ ./up.sh
 
 Run web app test
 ```bash
-$ ELASTIC_APM_ACTIVE=<bool> \ # default true
+$ ELASTIC_APM_ACTIVE=false \ # default true
+ELASTIC_APM_LOG_LEVEL=debug|trace \ # default info
 ELASTIC_APM_SERVER_URL=<url> \ # default localhost:8200
 ELASTIC_APM_SECRET_TOKEN=<token> node app/index.js
 ```
