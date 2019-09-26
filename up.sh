@@ -1,14 +1,11 @@
 #!/bin/bash
 
+# up.sh verifies the health of all stack components
+
 # usage
-# ./up.sh <ip>
+# ./up.sh
 
-HOST="$1"
-
-if test -z $HOST; then
-  echo "missing arg"
-  exit 1
-fi
+HOST=localhost
 
 function call() {
 	STATUS=`curl -si --connect-timeout 3 --max-time 3 $HOST:$2$3 | head -n 1`

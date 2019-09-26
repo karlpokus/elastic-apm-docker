@@ -38,7 +38,7 @@ As apm-server is dependent on es and kibana (and they are sloow to boot) it migh
 
 ```bash
 # verify stack health
-$ ./up.sh localhost
+$ ./up.sh
 ```
 
 Run web app test
