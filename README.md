@@ -36,10 +36,15 @@ $ ELASTIC_APM_SECRET_TOKEN=<token> docker-compose up|down [-d -v]
 ```
 As apm-server is dependent on es and kibana (and they are sloow to boot) it might take a while (10-20s) for the stack to be up.
 
+```bash
+# verify stack health
+$ ./up.sh localhost
+```
+
 Run web app test
 ```bash
-$ ELASTIC_APM_ACTIVE=<bool> \
-ELASTIC_APM_SERVER_URL=<url> \
+$ ELASTIC_APM_ACTIVE=<bool> \ # default true
+ELASTIC_APM_SERVER_URL=<url> \ # default localhost:8200
 ELASTIC_APM_SECRET_TOKEN=<token> node app/index.js
 ```
 
@@ -68,6 +73,7 @@ Communication between services via local docker network. Only apm-server and pro
 - [ ] add feedback for when stack is up. apm-server takes a while depending on es and kibana.
 - [ ] dockerize test app
 - [ ] consider healtchecks https://docs.docker.com/compose/compose-file/#healthcheck (`/api/status` for kibana `/` for es and apm-server)
+- [ ] ssl for proxy
 
 # license
 MIT
