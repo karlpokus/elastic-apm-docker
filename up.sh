@@ -19,4 +19,4 @@ call kibana 5601 /api/status
 call apmsrv 8200 /
 call proxy 80 /
 
-echo "check complete"
+echo "check complete `date +"%Y-%m-%dT%H:%M:%S"`"
