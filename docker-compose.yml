@@ -60,10 +60,13 @@ services:
     container_name: proxy
     ports:
       - 0.0.0.0:80:80
+      - 0.0.0.0:443:443
     volumes:
       - ./conf/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./conf/nginx/.htpasswd:/etc/nginx/.htpasswd:ro
       - ./conf/nginx/server.conf:/etc/nginx/server.conf:ro
+      - ./conf/nginx/nginx.crt:/etc/nginx/nginx.crt:ro
+      - ./conf/nginx/nginx.key:/etc/nginx/nginx.key:ro
     depends_on:
       - kibana
     restart: always
