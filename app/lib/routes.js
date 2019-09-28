@@ -10,5 +10,9 @@ module.exports = {
     return http.get('/users/1')
   		.then(res => ctx.body = res.data)
   		.catch(err => ctx.throw(408, "Remote api unavailable"))
-  }
+  },
+	bad: ctx => {
+		ctx.set('Connection', 'close');
+		ctx.status = 500;
+	}
 };

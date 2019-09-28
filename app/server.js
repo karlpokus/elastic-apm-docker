@@ -13,6 +13,7 @@ const router = new Router({ prefix: "/api/v1" });
 
 router
 	.get("/user", routes.logger, routes.user)
+	.get("/bad", routes.logger, routes.bad)
 
 app
 	.use(bodyparser())
