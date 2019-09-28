@@ -34,7 +34,7 @@ Manage the elastic apm stack
 ```bash
 $ ELASTIC_APM_SECRET_TOKEN=<token> docker-compose up|down [-d -v]
 ```
-As apm-server is dependent on es and kibana (and they are sloow to boot) it might take a while (10-20s) for the stack to be up.
+As apm-server is dependent on es and kibana (and they are sloow to boot) it might take a while (10-20s) for the stack to be up. The stack will also restart on host reboot.
 
 ```bash
 # verify stack health
@@ -54,9 +54,7 @@ Make an api request
 $ curl -i http://localhost:9300/api/v1/user
 ```
 
-View apm data in kibana.
-
-Note: use the user credentials created during preparations for kibana access if the stack is deployed and running behind the proxy.
+View apm data in kibana. Use credentials created during preparations for kibana access if the stack is deployed and running behind the proxy.
 
 # network
 Communication between services via local docker network. Only apm-server and proxy (to kibana) are open to the internet. Elasticsearch and kibana are exposed only on localhost.
