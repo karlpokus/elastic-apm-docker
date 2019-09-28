@@ -6,11 +6,19 @@
     name: ufw
     update_cache: yes
 
-- name: Expose proxy
+- name: Expose proxy http
   become: true
   ufw:
     rule: allow
     port: 80
+    proto: tcp
+    state: enabled
+
+- name: Expose proxy https
+  become: true
+  ufw:
+    rule: allow
+    port: 443
     proto: tcp
     state: enabled
 
