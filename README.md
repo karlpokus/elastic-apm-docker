@@ -43,10 +43,12 @@ $ ./up.sh
 
 Run web app test
 ```bash
-$ ELASTIC_APM_ACTIVE=false \ # default true
-ELASTIC_APM_LOG_LEVEL=debug|trace \ # default info
-ELASTIC_APM_SERVER_URL=<url> \ # default localhost:8200
-ELASTIC_APM_SECRET_TOKEN=<token> node app/index.js
+$ docker run -p 9300:9300 -d \
+-e ELASTIC_APM_ACTIVE=false \ # default true
+-e ELASTIC_APM_LOG_LEVEL=debug|trace \ # default info
+-e ELASTIC_APM_SERVER_URL=<url> \ # default localhost:8200
+-e ELASTIC_APM_SECRET_TOKEN=<token> \
+--name silly-web-app pokus2000/silly-web-app:1.0.0
 ```
 
 Make an api request
@@ -70,7 +72,7 @@ Communication between services via local docker network. Only apm-server and pro
 - [x] persistant, non-blocking logging
 - [x] turn off proxy access log for /
 - [x] add feedback for when stack is up. apm-server takes a while depending on es and kibana.
-- [ ] dockerize test app
+- [x] dockerize test app
 - [ ] consider healtchecks https://docs.docker.com/compose/compose-file/#healthcheck (`/api/status` for kibana `/` for es and apm-server)
 - [ ] ssl for proxy
 
