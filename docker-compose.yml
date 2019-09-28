@@ -8,6 +8,8 @@ services:
     environment:
       - discovery.type=single-node
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    volumes:
+      - esdb:/usr/share/elasticsearch/data
     restart: always
     logging:
       driver: "json-file"
@@ -72,3 +74,5 @@ services:
         max-size: "10m"
         max-file: "3"
         compress: "true"
+volumes:
+  esdb:

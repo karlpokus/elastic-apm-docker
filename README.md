@@ -65,11 +65,11 @@ Communication between services via local docker network. Only apm-server and pro
 - [x] apm-server secret_token
 - [ ] toggle apm rum
 - [x] pass secrets via ENV
-- [ ] persistant service data
+- [x] persistant service data
 - [ ] add metricbeat
 - [x] persistant, non-blocking logging
 - [x] turn off proxy access log for /
-- [ ] add feedback for when stack is up. apm-server takes a while depending on es and kibana.
+- [x] add feedback for when stack is up. apm-server takes a while depending on es and kibana.
 - [ ] dockerize test app
 - [ ] consider healtchecks https://docs.docker.com/compose/compose-file/#healthcheck (`/api/status` for kibana `/` for es and apm-server)
 - [ ] ssl for proxy
