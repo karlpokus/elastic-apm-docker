@@ -53,7 +53,7 @@ $ docker run -p 9300:9300 -d \
 -e ELASTIC_APM_LOG_LEVEL=debug|trace \ # default info
 -e ELASTIC_APM_SERVER_URL=<url> \ # default localhost:8200
 -e ELASTIC_APM_SECRET_TOKEN=<token> \
---name silly-web-app pokus2000/silly-web-app:1.0.0
+--name silly-web-app pokus2000/silly-web-app:1.2.0
 ```
 
 Make an api request - or several with a load test tool like [vegeta](https://github.com/tsenart/vegeta)
