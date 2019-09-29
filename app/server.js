@@ -14,6 +14,7 @@ const router = new Router({ prefix: "/api/v1" });
 router
 	.get("/user", routes.logger, routes.user)
 	.get("/bad", routes.logger, routes.bad)
+	.get("/ip", routes.logger, routes.ip)
 
 app
 	.use(bodyparser())

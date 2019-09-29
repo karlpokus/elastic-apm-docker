@@ -7,12 +7,17 @@ module.exports = {
 		return next();
 	},
   user: ctx => {
-    return http.get('/users/1')
+    return http.get('https://jsonplaceholder.typicode.com/users/1')
   		.then(res => ctx.body = res.data)
   		.catch(err => ctx.throw(408, "Remote api unavailable"))
   },
 	bad: ctx => {
 		ctx.set('Connection', 'close');
 		ctx.status = 500;
+	},
+	ip: ctx => {
+		return http.get('http://ip.jsontest.com/')
+			.then(res => ctx.body = res.data)
+			.catch(err => ctx.throw(408, "Remote api unavailable"))
 	}
 };
