@@ -68,6 +68,35 @@ Now we're ready to view the apm data in kibana. Use credentials created during p
 # network
 Communication between services via local docker network. Only apm-server and proxy (to kibana) are open to the internet. Elasticsearch and kibana are exposed only on localhost.
 
+```
++-------------------------------------------------------------------+
+|                                                                   |
+|    +-----------------------------------+    +------------------+  |
+|    |                                   |    |                  |  |
+|    |  elasticsearch 127.0.0.1:9200     |    | kibana           |  |
+|    |                                   |    |   127.0.0.1:5601 |  |
+|    +-------------------------------+---+    |                  |  |
+|                                    ^        |                  |  |
+|           +-------------------------------->+                  |  |
+|           |                        |        +----------+-------+  |
+|           |                        |                   ^          |
+|           |                        |                   |          |
+|    +------+---------------+      +-+-------------------+---+      |
+|    |                      |      |                         |      |
+|    |  proxy 0.0.0.0:443   |      | apm-server 0.0.0.0:8200 |      |
+|    |                      |      |                         |      |
+|    +-----+----------------+      +------+------------------+      |
+|          ^                              ^                         |
+|          |                              |                         |
++-------------------------------------------------------------------+
+           |                              |
+           |                              |
+           +                              +
+
+                  internet
+
+```
+
 # todos
 - [x] nginx proxy auth
 - [x] restart always
