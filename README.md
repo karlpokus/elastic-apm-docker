@@ -1,5 +1,5 @@
 # elastic-apm-docker
-Deploy docker-composed elastic apm 7.3.2 with proxy auth on a single remote docker host. Work in progress.
+Deploy docker-composed elastic apm 7.3.2 with proxy auth on a single remote docker host.
 
 # deploy
 requirements
@@ -15,15 +15,19 @@ $ ansible-playbook -i <host_ip>, setup.yml
 $ ansible-playbook -i <host_ip>, deploy.yml
 ```
 
-# auth
-Setup auth on remote host before running the stack. Start by adding users to the proxy
-
+# security
+To secure the stack you have two options:
+1. Use the provided proxy to authorize access to kibana. Start by adding users on the remote host.
 ```bash
 # The -c flag creates the file. Omit it to add multiple users.
 $ htpasswd [-c] ./conf/nginx/.htpasswd <user>
 ```
+2. Use a tunnel
+```bash
+$ ssh -N -L 4321:localhost:<remote-port> <user>@<host>
+```
 
-Generate a ELASTIC_APM_SECRET_TOKEN
+Regardless of your choice, you also need to generate an ELASTIC_APM_SECRET_TOKEN
 
 ```bash
 $ openssl rand -hex 16
