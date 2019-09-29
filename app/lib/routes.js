@@ -2,8 +2,10 @@ const http = require('./http');
 
 module.exports = {
 	logger: (ctx, next) => {
-		const d = new Date();
-		console.log(`${ d.toISOString() } ${ ctx.method } ${ ctx.path }`);
+		if (process.env.DEBUG == "1") {
+			const d = new Date();
+			console.log(`${ d.toISOString() } ${ ctx.method } ${ ctx.path }`);
+		}
 		return next();
 	},
   user: ctx => {

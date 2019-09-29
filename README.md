@@ -44,6 +44,7 @@ $ ./up.sh
 Run web app test
 ```bash
 $ docker run -p 9300:9300 -d \
+-e DEBUG=1 \ # default no logging
 -e ELASTIC_APM_ACTIVE=false \ # default true
 -e ELASTIC_APM_LOG_LEVEL=debug|trace \ # default info
 -e ELASTIC_APM_SERVER_URL=<url> \ # default localhost:8200
