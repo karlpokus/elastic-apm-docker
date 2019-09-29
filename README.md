@@ -56,12 +56,14 @@ $ docker run -p 9300:9300 -d \
 --name silly-web-app pokus2000/silly-web-app:1.0.0
 ```
 
-Make an api request
+Make an api request - or several with a load test tool like [vegeta](https://github.com/tsenart/vegeta)
 ```bash
 $ curl -i http://localhost:9300/api/v1/user
+# load test
+$ vegeta attack -rate=<n> -duration=<5s|m> -targets=targets.txt | vegeta report
 ```
 
-View apm data in kibana. Use credentials created during preparations for kibana access if the stack is deployed and running behind the proxy.
+Now we're ready to view the apm data in kibana. Use credentials created during preparations for kibana access if the stack is deployed and running behind the proxy.
 
 # network
 Communication between services via local docker network. Only apm-server and proxy (to kibana) are open to the internet. Elasticsearch and kibana are exposed only on localhost.
