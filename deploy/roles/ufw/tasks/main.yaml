@@ -6,26 +6,35 @@
     name: ufw
     update_cache: yes
 
+- name: Allow ssh
+  become: true
+  ufw:
+    rule: limit
+    port: '22'
+    proto: tcp
+
 - name: Expose proxy http
   become: true
   ufw:
     rule: allow
-    port: 80
+    port: '80'
     proto: tcp
-    state: enabled
 
 - name: Expose proxy https
   become: true
   ufw:
     rule: allow
-    port: 443
+    port: '443'
     proto: tcp
-    state: enabled
 
 - name: Expose apm-server
   become: true
   ufw:
     rule: allow
-    port: 8200
+    port: '8200'
     proto: tcp
+
+- name: Enable
+  become: true
+  ufw:
     state: enabled
