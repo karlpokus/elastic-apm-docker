@@ -8,15 +8,15 @@
 HOST=localhost
 
 function call() {
-	STATUS=`curl -si --connect-timeout 3 --max-time 3 $HOST:$2$3 | head -n 1`
+	STATUS=`curl -sik --connect-timeout 3 --max-time 3 $2 | head -n 1`
 	echo -e "$1\t$STATUS"
 }
 
 echo "check start"
 
-call es 9200 /
-call kibana 5601 /api/status
-call apmsrv 8200 /
-call proxy 80 /
+call es http://$HOST:9200
+call kibana http://$HOST:5601/api/status
+call apmsrv http://$HOST:8200
+call proxy https://$HOST/ping
 
 echo "check complete `date +"%Y-%m-%dT%H:%M:%S"`"

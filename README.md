@@ -111,6 +111,8 @@ Communication between services via local docker network. Only apm-server and pro
 - [x] dockerize test app
 - [ ] consider healtchecks https://docs.docker.com/compose/compose-file/#healthcheck (`/api/status` for kibana `/` for es and apm-server)
 - [ ] ssl for proxy
+- [ ] `./up.sh` should show host unavailable
+- [x] disable basic auth on proxy /ping
 
 # license
 MIT
