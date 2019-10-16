@@ -44,6 +44,8 @@ Run everything
 ```bash
 $ ELASTIC_APM_SECRET_TOKEN=<token> docker-compose up|down [-d -v]
 ```
+
+# test
 As apm-server is dependent on es and kibana (and they are sloow to boot) it might take a while (10-20s) for the stack to be up. The stack will also restart on host reboot.
 
 ```bash
@@ -70,6 +72,9 @@ $ vegeta attack -rate=<n> -duration=<5s|m> -targets=targets.txt | vegeta report
 ```
 
 Now we're ready to view the apm data in kibana. Use credentials created during preparations for kibana access if the stack is deployed and running behind the proxy.
+
+# kibana dashboard
+There's an exported dashboard template under `/dashboards` that you can import into kibana under `Management/Saved Objects/Import`.
 
 # network
 Communication between services via local docker network. Only apm-server and proxy (to kibana) are open to the internet. Elasticsearch and kibana are exposed only on localhost.
@@ -120,7 +125,7 @@ Communication between services via local docker network. Only apm-server and pro
 - [ ] `./up.sh` should show host unavailable
 - [x] disable basic auth on proxy /ping
 - [x] apm-server.yml must be owned by root
-- [ ] save silly-web-app kibana dashboard
+- [x] silly-web-app kibana dashboard export
 
 # license
 MIT
