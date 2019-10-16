@@ -10,9 +10,9 @@ requirements
 ```bash
 $ cd deploy
 # You only need to run setup once
-$ ansible-playbook -i <host_ip>, setup.yml
+$ ansible-playbook -i $HOST, setup.yml
 # deploy.yml is idempotent
-$ ansible-playbook -i <host_ip>, deploy.yml
+$ ansible-playbook -i $HOST, deploy.yml
 ```
 
 # security
@@ -35,6 +35,12 @@ $ openssl rand -hex 16
 
 # usage
 Manage the elastic apm stack
+
+```bash
+# Only needs to be run once
+$ chown root conf/apm/apm-server.yml
+```
+Run everything
 ```bash
 $ ELASTIC_APM_SECRET_TOKEN=<token> docker-compose up|down [-d -v]
 ```
@@ -113,6 +119,8 @@ Communication between services via local docker network. Only apm-server and pro
 - [ ] ssl for proxy
 - [ ] `./up.sh` should show host unavailable
 - [x] disable basic auth on proxy /ping
+- [x] apm-server.yml must be owned by root
+- [ ] save silly-web-app kibana dashboard
 
 # license
 MIT
