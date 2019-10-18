@@ -33,7 +33,7 @@ func bazooka(targets Targets) { // expoiting slice contents are pointers
 			targets[i].Data = "unavailable"
 			continue
 		}
-		defer res.Body.Close()
+		defer res.Body.Close() // hmm. Will res be bound until defer is called?
 		targets[i].Data = res.Status
 	}
 }
