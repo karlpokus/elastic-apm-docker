@@ -3,7 +3,7 @@ Deploy docker-composed elastic apm 7.3.2 with proxy auth on a single remote dock
 
 # deploy
 requirements
-- a remote host with docker installed
+- a remote host with docker and docker-compose installed. There's a [playbook](https://github.com/karlpokus/ansible-docker) for that.
 - ssh access to said host as root
 - docker group present on host to run sudoless
 
@@ -19,12 +19,12 @@ $ ansible-playbook -i $HOST, deploy.yml
 To secure the stack you have two options:
 1. Use the provided proxy to authorize access to kibana. Start by adding users on the remote host.
 ```bash
-# The -c flag creates the file. Omit it to add multiple users.
+# The -c flag creates the file. Omit to add multiple users.
 $ htpasswd [-c] ./conf/nginx/.htpasswd <user>
 ```
 2. Use a tunnel
 ```bash
-$ ssh -N -L 4321:localhost:<remote-port> <user>@<host>
+$ ssh -N -L 127.0.0.1:<local-port>:127.0.0.1:<remote-port> <user>@<host>
 ```
 
 Regardless of your choice, you also need to generate an ELASTIC_APM_SECRET_TOKEN
@@ -64,6 +64,7 @@ $ docker run -p 9300:9300 -d \
 --name silly-web-app pokus2000/silly-web-app:1.2.0
 ```
 
+# load
 Make an api request - or several with a load test tool like [vegeta](https://github.com/tsenart/vegeta)
 ```bash
 $ curl -i http://localhost:9300/api/v1/user
@@ -71,10 +72,8 @@ $ curl -i http://localhost:9300/api/v1/user
 $ vegeta attack -rate=<n> -duration=<5s|m> -targets=targets.txt | vegeta report
 ```
 
-Now we're ready to view the apm data in kibana. Use credentials created during preparations for kibana access if the stack is deployed and running behind the proxy.
-
-# kibana dashboard
-There's an exported dashboard template under `/dashboards` that you can import into kibana under `Management/Saved Objects/Import`.
+# gui
+Now we're ready to view the apm data in kibana. Use credentials created during preparations for kibana access if the stack is deployed and running behind the proxy. There's an exported dashboard template under `/dashboards` that you can import into kibana under `Management/Saved Objects/Import`.
 
 # network
 Communication between services via local docker network. Only apm-server and proxy (to kibana) are open to the internet. Elasticsearch and kibana are exposed only on localhost.
