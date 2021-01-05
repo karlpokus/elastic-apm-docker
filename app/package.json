@@ -9,7 +9,7 @@
   "author": "Karl Pokus <karl.pokus@gmail.com> (https://github.com/karlpokus)",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "elastic-apm-node": "^2.11.5",
     "koa": "^2.7.0",
     "koa-bodyparser": "^4.2.1",
